@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giovanni Mazzeo | Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .status {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            margin: 0 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 5px;
+            text-align: left;
+            margin: 2rem 0;
+            font-family: monospace;
+            position: relative;
+        }
+        
+        .code-comment {
+            color: #75715e;
+        }
+        
+        .code-keyword {
+            color: #f92672;
+        }
+        
+        .code-string {
+            color: #a6e22e;
+        }
+        
+        .code-function {
+            color: #66d9ef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Giovanni Mazzeo</h1>
+        <p class="tagline">Digital craftsman at work</p>
+        
+        <div class="code-block">
+            <pre><span class="code-comment">// Personal website initialization</span>
+<span class="code-keyword">const</span> website = <span class="code-keyword">new</span> <span class="code-function">PersonalSite</span>();
+
+<span class="code-comment">// Current status</span>
+website.status = <span class="code-string">"under_construction"</span>;
+
+<span class="code-comment">// Coming soon...</span>
+website.<span class="code-function">launch</span>()
+  .<span class="code-function">then</span>(() => <span class="code-string">"Something amazing"</span>);</pre>
+        </div>
+        
+        <div class="status">Under Construction</div>
+        
+        <p>You've reached Giovanni Mazzeo's personal website. Something cool is coming soon!</p>
+        
+        <div class="social-links">
+            <a href="https://github.com/thelinuxguy" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/gmazzeo" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+</body>
+</html>
