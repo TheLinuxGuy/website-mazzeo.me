@@ -4,116 +4,174 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giovanni Mazzeo | Coming Soon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #3498db;
-            --text-color: #333;
-            --bg-color: #f8f9fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            text-align: center;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #f8f9fa;
+            line-height: 1.6;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+            width: 100vw;
         }
         
-        .container {
-            max-width: 800px;
+        #matrixCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .content {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
             padding: 2rem;
+            z-index: 1;
+            position: relative;
         }
         
         h1 {
-            font-family: 'Playfair Display', serif;
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
         }
         
         .tagline {
             font-size: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            color: #dedede;
         }
         
-        .status {
+        .coming-soon {
             display: inline-block;
-            background-color: var(--primary-color);
+            background: rgba(0, 153, 0, 0.7);
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 4px;
             margin-bottom: 2rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         }
         
-        .social-links {
-            margin-top: 2rem;
-        }
-        
-        .social-links a {
-            margin: 0 10px;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        
-        .code-block {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 1.5rem;
-            border-radius: 5px;
-            text-align: left;
-            margin: 2rem 0;
-            font-family: monospace;
-            position: relative;
-        }
-        
-        .code-comment {
-            color: #75715e;
-        }
-        
-        .code-keyword {
-            color: #f92672;
-        }
-        
-        .code-string {
-            color: #a6e22e;
-        }
-        
-        .code-function {
-            color: #66d9ef;
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            color: #dedede;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <canvas id="matrixCanvas"></canvas>
+    <div class="content">
         <h1>Giovanni Mazzeo</h1>
-        <p class="tagline">Digital craftsman at work</p>
-        
-        <div class="code-block">
-            <pre><span class="code-comment">// Personal website initialization</span>
-<span class="code-keyword">const</span> website = <span class="code-keyword">new</span> <span class="code-function">PersonalSite</span>();
-
-<span class="code-comment">// Current status</span>
-website.status = <span class="code-string">"under_construction"</span>;
-
-<span class="code-comment">// Coming soon...</span>
-website.<span class="code-function">launch</span>()
-  .<span class="code-function">then</span>(() => <span class="code-string">"Something amazing"</span>);</pre>
-        </div>
-        
-        <div class="status">Under Construction</div>
-        
-        <p>You've reached Giovanni Mazzeo's personal website. Something cool is coming soon!</p>
-        
-        <div class="social-links">
-            <a href="https://github.com/thelinuxguy" target="_blank">GitHub</a>
-            <a href="https://linkedin.com/in/gmazzeo" target="_blank">LinkedIn</a>
-        </div>
+        <p class="tagline">Building something interesting</p>
+        <div class="coming-soon">Coming Soon</div>
+        <p>You've reached my personal website. I'm working on something cool that will be published here soon.</p>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the canvas element and its context
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions to match window size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Character set - mostly numbers with a few special characters
+            const nums = '0123456789';
+            const extraChars = '01';
+            const characters = nums + extraChars;
+            
+            // Calculate columns (each column is 20px wide)
+            const fontSize = 20;
+            const columns = Math.floor(canvas.width / fontSize) + 1;
+            
+            // Array to track the y position of each column
+            const drops = [];
+            
+            // Initialize all columns to start at random y positions
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * -100);
+            }
+            
+            // Define different shades of green for variety
+            const greens = [
+                'rgba(0, 255, 0, 1)',     // Bright green
+                'rgba(0, 200, 0, 0.8)',   // Medium green
+                'rgba(0, 150, 0, 0.6)'    // Dark green
+            ];
+            
+            // Main drawing function
+            function draw() {
+                // Create a semi-transparent black rectangle for the trail effect
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Set the font style
+                ctx.font = `${fontSize}px monospace`;
+                
+                // Loop through each column
+                for (let i = 0; i < drops.length; i++) {
+                    // Choose a random character
+                    const charIndex = Math.floor(Math.random() * characters.length);
+                    const char = characters[charIndex];
+                    
+                    // Choose a shade of green based on position in column
+                    const colorIndex = Math.floor(Math.random() * greens.length);
+                    ctx.fillStyle = greens[colorIndex];
+                    
+                    // Draw the character
+                    ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                    
+                    // If the drop reaches the bottom or randomly, reset to top
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    
+                    // Move the drop down
+                    drops[i]++;
+                }
+            }
+            
+            // Animation loop at 30fps (more efficient than 60fps)
+            setInterval(draw, 33);
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                
+                // Recalculate columns
+                const newColumns = Math.floor(canvas.width / fontSize) + 1;
+                
+                // Adjust the drops array size if needed
+                if (newColumns > columns) {
+                    // Add new columns
+                    for (let i = drops.length; i < newColumns; i++) {
+                        drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
